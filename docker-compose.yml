@@ -1,0 +1,17 @@
+version: '3'
+services:
+    web:
+        build: .
+        working_dir: /root
+        volumes:
+          -  ./:/root
+        command: sh -c "npm install && npm run dev"
+        # command: sh -c "npm run build && npm start"
+        ports:
+          - 3001:3001
+          - 9229:9229 # chrome debugger port
+
+        environment:
+          NODE_ENV: testing
+          PORT: 3001
+          HOST: '0.0.0.0'

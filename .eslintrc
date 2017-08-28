@@ -1,0 +1,20 @@
+{
+    "extends": "standard",
+    "parser": "babel-eslint",
+    "plugins": [
+      "react"
+    ],
+    "parserOptions": {
+      "ecmaFeatures": {
+        "jsx": true
+      }
+    },
+    "rules": {
+      "react/jsx-uses-vars": 1,
+      "complexity": 1  // default is 20
+    },
+    "env": {
+      "browser": true,
+      "node": true
+    }
+  }

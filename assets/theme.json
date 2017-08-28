@@ -1,0 +1,40 @@
+{
+    "colors": {
+      "white": "#FFFFFF",
+      "darkBlue": "#445A65",
+      "lightBlue": "#9FA7DC",
+      "grayBlue": "#949AC4",
+      "darkText": "#36474f",
+      "darkGray": "#B0BEC5",
+      "disabledGray": "#CFD8DC",
+      "descriptionGray": "#B1B7BA",
+      "lightGray": "#CFD8DC",
+      "neutralGray": "#F7F7F7",
+      "validateOk": "#A4D7A5",
+      "validateError": "#E77271",
+      "alertWarning": "#FFF698",
+      "alertError": "#FFAB8E",
+      "buttonHover": "#6D75AA",
+      "redDot": "#E66663",
+      "quoteGrey": "#91ABB8"
+    },
+    "darkShadow": "0 11px 29px 0 rgba(95, 93, 93, 0.5)",
+    "lightShadow": "0 2px 5px 0 rgba(189, 183, 183, 0.5)",
+    "shadow": "0 4px 10px 0 rgba(189, 183, 183, 0.5)",
+    
+    "font":{
+      "default": "normal normal normal 16px/1.5em Karla",
+      "transform": "uppercase",
+      "family": "Karla, Calibri, Arial !important",
+      "size":{
+        "h1": "32px",
+        "h2": "24px",
+        "h3": "21px",
+        "p": "16px",
+        "s": "14px"
+      },
+      "height":{
+        "s": "1.5"
+      }
+    }
+  }
