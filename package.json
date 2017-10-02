@@ -1,27 +1,35 @@
 {
-  "name": "riotlanding",
-  "version": "1.0.0",
+  "name": "next-app",
+  "version": "0.1.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "olddev": "next",
-    "dev": "NODE_ENV=development PORT=3001 nodemon -w index.js -w /pages -w /components -w /asssets index.js",
+    "dev": "NODE_ENV=development PORT=3001 nodemon -w index.js -w /pages -w /components -w /assets index.js",
     "build": "next build",
     "start": "NODE_ENV=production PORT=3001 node index.js"
   },
-  "author": "mikamai",
-  "license": "ISC",
+  "author": "YOU",
+  "private": true,
   "dependencies": {
+    "@types/pino": "^4.7.0",
     "express": "^4.15.4",
+    "express-pino-logger": "^2.0.0",
+    "i18next": "^9.0.0",
+    "i18next-browser-languagedetector": "^2.0.0",
+    "i18next-express-middleware": "^1.0.6",
+    "i18next-node-fs-backend": "^1.0.0",
+    "i18next-xhr-backend": "^1.4.3",
     "lodash": "^4.17.4",
+    "lodash.flow": "^3.5.0",
     "lusca": "^1.5.1",
     "next": "^3.0.6",
     "next-i18n-helper": "^1.0.19",
     "next-routes": "^1.0.40",
+    "pino": "^4.7.2",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-i18next": "^5.2.0",
-    "styled-components": "^2.1.2",
+    "styled-components": "^2.2.0",
     "superagent": "^3.6.0"
   },
   "devDependencies": {
@@ -31,6 +39,7 @@
     "babel-plugin-styled-components": "^1.1.7",
     "babel-preset-es2015-ie": "^6.7.0",
     "cross-env": "^5.0.1",
+    "enzyme": "^3.0.0",
     "eslint": "^4.1.1",
     "eslint-config-standard": "^10.2.1",
     "eslint-plugin-import": "^2.6.1",
@@ -38,7 +47,7 @@
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-react": "^7.1.0",
     "eslint-plugin-standard": "^3.0.1",
-    "jest": "^20.0.0",
+    "jest": "^21.2.1",
     "nodemon": "^1.11.0"
   }
 }

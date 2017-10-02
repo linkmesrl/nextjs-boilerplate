@@ -80,6 +80,6 @@ jest_*
 
 .v8flags.*.json
 
-package-lock.json
-
 .config
+
+.vscode

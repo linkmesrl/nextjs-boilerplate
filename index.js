@@ -1,55 +1,48 @@
-'use strict'
+// @ts-check
 
 const express = require('express')
 const next = require('next')
-const lusca = require('lusca')
-const routes = require('next-routes')()
+
+/** @type {any} */
 const path = require('path')
+const pinoMW = require('express-pino-logger')()
+const pino = require('pino')()
+const I18n = require('./server/i18n.js')(path.join(__dirname, 'locales'))
 
+const nextRoutes = require('./server/nextRoutes')
+
+// Handle fatal errors by logging and letting the app crash
 process.on('uncaughtException', (err) => {
-  console.log('Uncaught Exception: ' + err);
-})
-  
-process.on('unhandledRejection', (reason, p) => {
-  console.log('Unhandled Rejection: Promise:', p, 'Reason:', reason)
+  pino.error('Uncaught Exception: ' + err)
+  process.exit(1)
 })
 
-// Default when run with `npm start` is 'production' and default port is '80'
-// `npm run dev` defaults mode to 'development' & port to '3000'
+process.on('unhandledRejection', (reason, p) => {
+  pino.error('Unhandled Rejection: Promise:', p, 'Reason:', reason)
+  process.exit(1)
+})
+
+// Basic http conf
 const nodeEnv = process.env.NODE_ENV || 'production'
-const port = process.env.PORT || 80
+const port = parseInt(process.env.PORT, 10) || 80
 const host = process.env.HOST || '0.0.0.0'
 
+// Enable dev mode when NODE_ENV == 'development'
 const app = next({
   dir: '.',
   dev: (nodeEnv === 'development')
 })
 
-const nextRoutesHandler = routes.getRequestHandler(app, ({req, res, route, query}) => {
-  req.cookies.lang = query.lang || 'en'
-  res.cookie('lang', req.cookies.lang)
-
-  if (nodeEnv === 'development' && req.url.includes('webpack-hmr')) {
-    return app.render(req, res, route.page, query)
-  }
-
-  return req.url.charAt(req.url.length - 1) !== '/' && req.url.length > 1
-    ? res.redirect(301, req.url + '/')
-    : app.render(req, res, route.page, query)
-})
-
-
 const server = express()
 const serverPromise = new Promise((resolve, reject) => {
-  app.prepare().then(() => {
+  Promise.all([I18n.init(), app.prepare()]).then((res) => {
+    // server.use(pinoMW)
     server.use(express.static('assets'))
-    server.use(lusca.xframe('SAMEORIGIN'))
-    server.use(lusca.xssProtection(true))
-    server.use(lusca.nosniff())
     server.set('x-powered-by', false)
-    server.use('/locales', express.static(path.join(__dirname, '/locales')))
+
+    I18n.addMiddlewares(server, res[0])
     
-    server.use(nextRoutesHandler)
+    nextRoutes(server, app)
 
     server.listen(port, host, err => {
       if (err) {
