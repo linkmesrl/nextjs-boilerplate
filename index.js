@@ -40,8 +40,8 @@ const serverPromise = new Promise((resolve, reject) => {
     server.use(express.static('assets'))
     server.set('x-powered-by', false)
 
-    I18n.addMiddlewares(server, res[0])
-    
+    // I18n.addMiddlewares(server, res[0])
+
     nextRoutes(server, app)
 
     server.listen(port, host, err => {

@@ -6,7 +6,12 @@
   "scripts": {
     "dev": "NODE_ENV=development PORT=3001 nodemon -w index.js -w /pages -w /components -w /assets index.js",
     "build": "next build",
-    "start": "NODE_ENV=production PORT=3001 node index.js"
+    "start": "NODE_ENV=production PORT=3001 node index.js",
+    "export": "next export"
+  },
+  "browser": {
+    "i18next-express-middleware": false,
+    "i18next-node-fs-backend": false
   },
   "author": "YOU",
   "private": true,
